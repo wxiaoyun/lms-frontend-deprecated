@@ -8,13 +8,16 @@ module.exports = {
 	},
 	plugins: ["@typescript-eslint"],
 	extends: [
+		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/strict-type-checked",
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"plugin:react/recommended",
 		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended",
 	],
 	rules: {
-		// Your custom rules here
+		"@typescript-eslint/no-unused-vars": "warn",
+		"react-refresh/only-export-components": "warn",
 	},
 };
