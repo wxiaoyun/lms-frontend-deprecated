@@ -1,4 +1,9 @@
 module.exports = {
+	root: true,
+	env: {
+		browser: true,
+		es2020: true,
+	},
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		ecmaVersion: "latest",
@@ -6,7 +11,7 @@ module.exports = {
 		project: ["./tsconfig.json", "./tsconfig.node.json"],
 		tsconfigRootDir: __dirname,
 	},
-	plugins: ["@typescript-eslint"],
+	plugins: ["@typescript-eslint", "react-refresh"],
 	extends: [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
@@ -19,5 +24,16 @@ module.exports = {
 	rules: {
 		"@typescript-eslint/no-unused-vars": "warn",
 		"react-refresh/only-export-components": "warn",
+	},
+	ignorePatterns: [
+		".eslintrc.cjs",
+		"postcss.config.js",
+		"tailwind.config.js",
+		"vite.config.ts",
+	],
+	settings: {
+		react: {
+			version: "detect", // Automatically detect the version of React in your project
+		},
 	},
 };
