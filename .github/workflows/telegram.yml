@@ -21,11 +21,12 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            LMS Frontend Event: ${{ github.event_name }}
+            **LMS Frontend Event**: 
+            ${{ github.event_name }}
 
             ${{ github.actor }} created commit
-            Commit message: ${{ github.event.commits[0].message }}
+            Commit message: *${{ github.event.commits[0].message }}*
 
-            Repository: ${{ github.repository }}
+            Repository: `${{ github.repository }}`
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
