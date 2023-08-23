@@ -25,6 +25,7 @@ jobs:
           message: |
             <b>LMS Frontend Push Event</b>: 
             <i>Push by ${{ github.actor }}</i>
+
             Commit message: 
             <code>${{ github.event.commits[0].message }}</code>
 
@@ -41,6 +42,7 @@ jobs:
           message: |
             <b>LMS Frontend Pull Request Event</b>: 
             <i>Pull Request by ${{ github.actor }}</i>
+
             <code>Title: ${{ github.event.pull_request.title }}</code>
             <code>${{ github.event.pull_request.comments }}</code>
 
