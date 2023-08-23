@@ -59,10 +59,6 @@ The application should now be running at `http://localhost:3000/`.
 
 Further documentation can be found in the [docs](./docs) directory.
 
-## Contributing
-
-Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) for details on how to contribute to the project.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
