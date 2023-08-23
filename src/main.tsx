@@ -3,8 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-// eslint-disable-next-line
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root");
+
+// this should never happen, just to make typescript happy
+if (!root) {
+	throw new Error("Root element not found");
+}
+
+ReactDOM.createRoot(root).render(
 	<React.StrictMode>
 		<App />
 	</React.StrictMode>,
