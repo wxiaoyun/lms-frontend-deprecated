@@ -129,5 +129,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# env files
+.env.development
+.env.production
+
 # MacOS files
 .DS_Store
