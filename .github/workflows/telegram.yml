@@ -20,13 +20,13 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
           message: |
-            **LMS Frontend Event**: 
-            ${{ github.event_name }}
+            <b>LMS Frontend Event</b>: 
+            <i>${{ github.event_name }} by ${{ github.actor }}</i>
 
-            ${{ github.actor }} created commit
-            Commit message: *${{ github.event.commits[0].message }}*
+            Commit message: 
+            <code>${{ github.event.commits[0].message }}</code>
 
-            Repository: `${{ github.repository }}`
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Repository: ${{ github.repository }}
+            <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">See changes</a>
