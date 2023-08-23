@@ -44,7 +44,7 @@ Below are the instructions to get the project up and running on your local machi
    yarn install
    ```
 
-4. **Setting Up Environment**:
+4. **Setting Up Environment**:  
    Make a copy of `.env.example` and rename to `.env.development`:  
    Then, update the `.env.development` file with the appropriate values if necessary.
 
@@ -65,6 +65,7 @@ The application should now be running at `http://localhost:3000/`.
 
   ```bash
   go install github.com/swellaby/captain-githook
+  captain-githook init
   ```
 
 - Install ESLint and Prettier extensions for your code editor.
