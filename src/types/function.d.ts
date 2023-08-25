@@ -21,4 +21,4 @@ type ResponseHandler<T, M = undefined> = UnaryHandler<Payload<T, M>>;
  * @template T - The type of Data of the payload. Defaults to null.
  */
 // eslint-disable-next-line
-type ErrorHandler<T = any> = UnaryHandler<Payload<T>>;
+type ErrorHandler<T = unknown> = UnaryHandler<Payload<T>>;
