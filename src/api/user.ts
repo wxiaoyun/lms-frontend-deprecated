@@ -1,5 +1,4 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import { CancelTokenSource } from "axios";
 
 import { BaseApi } from "./base";
@@ -7,26 +6,29 @@ import { appSlice } from "../store";
 import { NotifyError } from "../util";
 import { userSignInSchema } from "../schema";
 import { UserRoutes } from "../router";
+import { Dispatch } from "react";
+import { AnyAction } from "@reduxjs/toolkit";
 
 class UserApi extends BaseApi {
-	private dispatch = useDispatch();
-	private navigate = useNavigate();
-
-	public GetCurrentUser = (cancelToken?: CancelTokenSource) => {
+	public GetCurrentUser = (
+		dispatch: Dispatch<AnyAction>,
+		navigate: NavigateFunction,
+		cancelToken?: CancelTokenSource,
+	) => {
 		const handleSuccess = (data: Payload<LoginPayload>) => {
 			if (!userSignInSchema.isValidSync(data.data)) {
-				this.dispatch(appSlice.actions.logout());
-				this.navigate("/auth/signin");
+				dispatch(appSlice.actions.logout());
+				navigate("/auth/signin");
 				NotifyError("Invalid user data received from backend");
 				return;
 			}
-			this.dispatch(appSlice.actions.login(data.data));
-			this.navigate("/");
+			dispatch(appSlice.actions.login(data.data));
+			navigate("/");
 		};
 
 		const handleError = () => {
-			this.dispatch(appSlice.actions.logout());
-			this.navigate("/auth/signin");
+			dispatch(appSlice.actions.logout());
+			navigate("/auth/signin");
 		};
 
 		this.Get<LoginPayload>(

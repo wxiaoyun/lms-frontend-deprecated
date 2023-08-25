@@ -1,10 +1,9 @@
 import axios, { AxiosError, AxiosResponse, CancelTokenSource } from "axios";
 
-import * as Env from "../config/env";
 import * as Constants from "../config/constants";
 import store from "../store/store";
 import { NotifyError, NotifyFromResponse, Query } from "../util";
-import { appSlice } from "../store/slices/appSlice";
+import { appSlice } from "../store/";
 
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
@@ -41,7 +40,7 @@ axios.interceptors.response.use(
  * @param T Response type
  */
 export class BaseApi {
-	private BASE_URL = Env.GetEnv("BACKEND_API_URL");
+	private BASE_URL = Constants.BACKEND_BASE_URL;
 
 	protected Get = <R>(
 		url: string,

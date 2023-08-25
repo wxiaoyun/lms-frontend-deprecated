@@ -1,2 +1,2 @@
-export * as Store from "./store";
+export * from "./store";
 export * from "./slices";

@@ -1,4 +1,6 @@
-export const DEFAULR_PORT = "3000";
+export const DEFAULR_PORT = 3000;
+export const PORT = DEFAULR_PORT;
+export const BACKEND_BASE_URL = `http://localhost:${PORT}/api/v1`;
 
 export const BACKEND_STATUS_UNKNOWN = "unknown";
 export const BACKEND_STATUS_UP = "up";

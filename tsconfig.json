@@ -24,6 +24,6 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": true
 	},
-	"include": ["src"],
+	"include": ["src", "src/config"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
