@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { AppLogic, PageNotFound, SignInPage, SignUpPage } from "../modules";
+import { AuthRoutes } from ".";
 
 export const Router = createBrowserRouter([
 	{
@@ -10,16 +11,16 @@ export const Router = createBrowserRouter([
 		children: [
 			{
 				id: "auth",
-				path: "/auth",
+				path: `/${AuthRoutes.BASE}`,
 				children: [
 					{
 						id: "signin",
-						path: "/auth/signin",
+						path: `/${AuthRoutes.BASE}/${AuthRoutes.SIGN_IN.ROUTE}}`,
 						Component: SignInPage,
 					},
 					{
 						id: "signup",
-						path: "/auth/signup",
+						path: `/${AuthRoutes.BASE}/${AuthRoutes.SIGN_UP.ROUTE}}`,
 						Component: SignUpPage,
 					},
 				],
