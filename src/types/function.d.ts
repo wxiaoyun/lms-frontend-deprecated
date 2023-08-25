@@ -20,5 +20,4 @@ type ResponseHandler<T, M = undefined> = UnaryHandler<Payload<T, M>>;
  * @description A function that takes in payload of type T and returns nothing.
  * @template T - The type of Data of the payload. Defaults to null.
  */
-// eslint-disable-next-line
 type ErrorHandler<T = unknown> = UnaryHandler<Payload<T>>;
