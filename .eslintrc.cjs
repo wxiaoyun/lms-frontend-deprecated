@@ -15,13 +15,13 @@ module.exports = {
 	extends: [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:@typescript-eslint/strict-type-checked",
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"plugin:react/recommended",
 		"plugin:react/jsx-runtime",
 		"plugin:react-hooks/recommended",
 	],
 	rules: {
+		"@typescript-eslint/method-signature-style": "warn",
 		"@typescript-eslint/no-unused-vars": "warn",
 		"react-refresh/only-export-components": "warn",
 	},
@@ -30,6 +30,8 @@ module.exports = {
 		"postcss.config.js",
 		"tailwind.config.js",
 		"vite.config.ts",
+		"**/env.ts",
+		"**/constants.ts",
 	],
 	settings: {
 		react: {
