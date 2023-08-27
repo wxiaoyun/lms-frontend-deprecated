@@ -21,7 +21,7 @@ export const AppLogic: React.FC = () => {
 	// Check user login status using session cookie. Updates the redux store if user is logged in.
 	React.useEffect(() => {
 		// prevent repeated api calls
-		if (!app.isLoggedIn && app.backendStatus !== Constants.BACKEND_STATUS_DOWN)
+		if (!app.isLoggedIn && app.backendStatus === Constants.BACKEND_STATUS_UP)
 			userApi.GetCurrentUser(dispatch, navigate);
 		//eslint-disable-next-line
 	}, [app.backendStatus, app.isLoggedIn]);
