@@ -7,27 +7,27 @@ import { appSlice } from "../store/";
 
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
-	// Intercepts all requests and logs them to the console and displays the backend message to the user
-	(res: AxiosResponse<Payload>) => {
-		// Logs the url, method and url of the request
-		console.info(`[${res.config.method?.toUpperCase()}]: ${res.config.url}`);
-		// Displays the backend message to the user
-		if (res.data.messages) NotifyFromResponse(res.data);
-		return res;
-	},
-	// Intercepts all errors and logs them to the console and displays the backend message to the user
-	(err: AxiosError<Payload>) => {
-		if (axios.isCancel(err)) {
-			console.info("Request canceled", err.message);
-		}
+  // Intercepts all requests and logs them to the console and displays the backend message to the user
+  (res: AxiosResponse<Payload>) => {
+    // Logs the url, method and url of the request
+    console.info(`[${res.config.method?.toUpperCase()}]: ${res.config.url}`);
+    // Displays the backend message to the user
+    if (res.data.messages) NotifyFromResponse(res.data);
+    return res;
+  },
+  // Intercepts all errors and logs them to the console and displays the backend message to the user
+  (err: AxiosError<Payload>) => {
+    if (axios.isCancel(err)) {
+      console.info("Request canceled", err.message);
+    }
 
-		// Logs the url, method and url of the request
-		console.error(`[${err.config?.method?.toUpperCase()}]: ${err.config?.url}`);
-		console.error("Error: ", err);
-		// Displays the backend message to the user
-		if (err.response?.data) NotifyFromResponse(err.response?.data);
-		return Promise.reject(err);
-	},
+    // Logs the url, method and url of the request
+    console.error(`[${err.config?.method?.toUpperCase()}]: ${err.config?.url}`);
+    console.error("Error: ", err);
+    // Displays the backend message to the user
+    if (err.response?.data) NotifyFromResponse(err.response?.data);
+    return Promise.reject(err);
+  },
 );
 
 /**
@@ -40,162 +40,164 @@ axios.interceptors.response.use(
  * @param T Response type
  */
 export class BaseApi {
-	private BASE_URL = Constants.BACKEND_BASE_URL;
+  private BASE_URL = Constants.BACKEND_BASE_URL;
 
-	protected Get = <R>(
-		url: string,
-		successHandler?: ResponseHandler<R>,
-		errorHandler?: ErrorHandler,
-		cancelToken?: CancelTokenSource,
-	) => {
-		store.dispatch(appSlice.actions.setLoading(true));
-		axios
-			.get<unknown, AxiosResponse<Payload<R>>, unknown>(
-				`${this.BASE_URL}/${url}`,
-				{
-					cancelToken: cancelToken?.token,
-				},
-			)
-			.then((res) => {
-				if (!successHandler) return;
-				successHandler(res.data);
-			})
-			.catch((err: AxiosError<Payload>) => {
-				if (!err.response) return;
-				if (errorHandler) errorHandler(err.response.data);
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  protected Get = <R>(
+    url: string,
+    successHandler?: ResponseHandler<R>,
+    errorHandler?: ErrorHandler,
+    cancelToken?: CancelTokenSource,
+  ) => {
+    store.dispatch(appSlice.actions.setLoading(true));
+    axios
+      .get<Payload<R>>(`${this.BASE_URL}/${url}`, {
+        cancelToken: cancelToken?.token,
+      })
+      .then((res) => {
+        if (!successHandler) return;
+        successHandler(res.data);
+      })
+      .catch((err: AxiosError<Payload>) => {
+        if (!err.response) return;
+        if (errorHandler) errorHandler(err.response.data);
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 
-	protected List = <R>(
-		url: string,
-		cq: Query,
-		successHandler?: ResponseHandler<R>,
-		errorHandler?: ErrorHandler,
-		cancelToken?: CancelTokenSource,
-	) => {
-		store.dispatch(appSlice.actions.setLoading(true));
-		axios
-			.get<unknown, AxiosResponse<Payload<R>>, unknown>(
-				`${this.BASE_URL}/${url}?${cq.toString()}`,
-				{
-					cancelToken: cancelToken?.token,
-				},
-			)
-			.then((res) => {
-				if (!successHandler) return;
-				successHandler(res.data);
-			})
-			.catch((err: AxiosError<Payload>) => {
-				if (!err.response) return;
-				if (errorHandler) errorHandler(err.response.data);
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  protected List = <R>(
+    url: string,
+    cq: Query,
+    successHandler?: ResponseHandler<R>,
+    errorHandler?: ErrorHandler,
+    cancelToken?: CancelTokenSource,
+  ) => {
+    store.dispatch(appSlice.actions.setLoading(true));
+    axios
+      .get<Payload<R>>(`${this.BASE_URL}/${url}?${cq.toString()}`, {
+        cancelToken: cancelToken?.token,
+      })
+      .then((res) => {
+        if (!successHandler) return;
+        successHandler(res.data);
+      })
+      .catch((err: AxiosError<Payload>) => {
+        if (!err.response) return;
+        if (errorHandler) errorHandler(err.response.data);
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 
-	protected Post = <T, R = T>(
-		url: string,
-		data: T,
-		successHandler?: ResponseHandler<R>,
-		errorHandler?: ErrorHandler,
-		cancelToken?: CancelTokenSource,
-	) => {
-		store.dispatch(appSlice.actions.setLoading(true));
-		axios
-			.post<T, AxiosResponse<Payload<R>>, T>(`${this.BASE_URL}/${url}`, data, {
-				cancelToken: cancelToken?.token,
-			})
-			.then((res) => {
-				if (!successHandler) return;
-				successHandler(res.data);
-			})
-			.catch((err: AxiosError<Payload>) => {
-				if (!err.response) return;
-				if (errorHandler) errorHandler(err.response.data);
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  protected Post = <T, R = T>(
+    url: string,
+    data: T,
+    successHandler?: ResponseHandler<R>,
+    errorHandler?: ErrorHandler,
+    cancelToken?: CancelTokenSource,
+  ) => {
+    store.dispatch(appSlice.actions.setLoading(true));
+    axios
+      .post<Payload<R>>(`${this.BASE_URL}/${url}`, data, {
+        cancelToken: cancelToken?.token,
+      })
+      .then((res) => {
+        if (!successHandler) return;
+        successHandler(res.data);
+      })
+      .catch((err: AxiosError<Payload>) => {
+        if (!err.response) return;
+        if (errorHandler) errorHandler(err.response.data);
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 
-	protected Patch = <T, R = T>(
-		url: string,
-		data: T,
-		successHandler?: ResponseHandler<R>,
-		errorHandler?: ErrorHandler,
-		cancelToken?: CancelTokenSource,
-	) => {
-		store.dispatch(appSlice.actions.setLoading(true));
-		axios
-			.patch<T, AxiosResponse<Payload<R>>, T>(`${this.BASE_URL}/${url}`, data, {
-				cancelToken: cancelToken?.token,
-			})
-			.then((res) => {
-				if (!successHandler) return;
-				successHandler(res.data);
-			})
-			.catch((err: AxiosError<Payload<T>>) => {
-				if (!err.response) return;
-				if (errorHandler) errorHandler(err.response.data);
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  protected Patch = <T, R = T>(
+    url: string,
+    data: T,
+    successHandler?: ResponseHandler<R>,
+    errorHandler?: ErrorHandler,
+    cancelToken?: CancelTokenSource,
+  ) => {
+    store.dispatch(appSlice.actions.setLoading(true));
+    axios
+      .patch<Payload<R>>(`${this.BASE_URL}/${url}`, data, {
+        cancelToken: cancelToken?.token,
+      })
+      .then((res) => {
+        if (!successHandler) return;
+        successHandler(res.data);
+      })
+      .catch((err: AxiosError<Payload<T>>) => {
+        if (!err.response) return;
+        if (errorHandler) errorHandler(err.response.data);
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 
-	protected Delete = <T, R = T>(
-		url: string,
-		successHandler?: ResponseHandler<R>,
-		errorHandler?: ErrorHandler,
-		cancelToken?: CancelTokenSource,
-	) => {
-		store.dispatch(appSlice.actions.setLoading(true));
-		axios
-			.delete<T, AxiosResponse<Payload<R>>, T>(`${this.BASE_URL}/${url}`, {
-				cancelToken: cancelToken?.token,
-			})
-			.then((res) => {
-				if (!successHandler) return;
-				successHandler(res.data);
-			})
-			.catch((err: AxiosError<Payload<T>>) => {
-				if (!err.response) return;
-				if (errorHandler) errorHandler(err.response.data);
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  protected Delete = <T, R = T>(
+    url: string,
+    successHandler?: ResponseHandler<R>,
+    errorHandler?: ErrorHandler,
+    cancelToken?: CancelTokenSource,
+  ) => {
+    store.dispatch(appSlice.actions.setLoading(true));
+    axios
+      .delete<Payload<R>, AxiosResponse<Payload<R>>, T>(
+        `${this.BASE_URL}/${url}`,
+        {
+          cancelToken: cancelToken?.token,
+        },
+      )
+      .then((res) => {
+        if (!successHandler) return;
+        successHandler(res.data);
+      })
+      .catch((err: AxiosError<Payload<T>>) => {
+        if (!err.response) return;
+        if (errorHandler) errorHandler(err.response.data);
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 
-	public GetHealth = () => {
-		axios
-			.get<unknown, AxiosResponse<Payload>, unknown>(`${this.BASE_URL}/health`)
-			.catch(() => {
-				store.dispatch(
-					appSlice.actions.setBackendStatus(Constants.BACKEND_STATUS_DOWN),
-				);
-				NotifyError("Backend is not available");
-			})
-			.finally(
-				() =>
-					store.getState().app.isLoading &&
-					store.dispatch(appSlice.actions.setLoading(false)),
-			);
-	};
+  public GetHealth = () => {
+    axios
+      .get<unknown, AxiosResponse<Payload>, unknown>(`${this.BASE_URL}/health`)
+      .then(() => {
+        store.dispatch(
+          appSlice.actions.setBackendStatus(Constants.BACKEND_STATUS_UP),
+        );
+      })
+      .catch(() => {
+        store.dispatch(
+          appSlice.actions.setBackendStatus(Constants.BACKEND_STATUS_DOWN),
+        );
+        NotifyError("Backend is unavailable");
+      })
+      .finally(
+        () =>
+          store.getState().app.isLoading &&
+          store.dispatch(appSlice.actions.setLoading(false)),
+      );
+  };
 }
 
 export const baseApi = new BaseApi();
