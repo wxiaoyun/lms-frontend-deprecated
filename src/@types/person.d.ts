@@ -6,8 +6,10 @@
  * @property language_preference - the person's language preference
  */
 interface Person {
-	id: number;
-	full_name: string;
-	preferred_name: string;
-	language_preference: string;
+  id: number;
+  full_name: string;
+  preferred_name: string;
+  language_preference: string;
 }
+
+type PersonCreate = Omit<Person, "id">;

@@ -37,12 +37,10 @@ export const IsValidPassword = (password: string): boolean => {
 };
 
 export const IsValidUsernameOrEmail = (usernameOrEmail: string): boolean => {
-  console.log(usernameOrEmail);
   if (IsValidEmail(usernameOrEmail)) return true;
 
-  console.log("not valid email");
   if (IsValidUsername(usernameOrEmail)) return true;
-  console.log("not valid username");
+
   return false;
 };
 

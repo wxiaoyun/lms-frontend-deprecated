@@ -9,20 +9,20 @@ import { AuthRoutes } from "../router";
 
 class AuthApi extends BaseApi {
   public Signup = (
-    user: UserCreate,
+    user: UserCreateForm,
     dispatch: Dispatch<AnyAction>,
     navigate: NavigateFunction,
     cancelToken?: CancelTokenSource,
   ) => {
     const handleSuccess = (data: Payload<LoginPayload>) => {
       dispatch(appSlice.actions.login(data.data));
-      navigate("/worksheet");
+      navigate("/index");
     };
     const handlError = () => {
       dispatch(appSlice.actions.logout());
     };
-    this.Post<UserCreate, LoginPayload>(
-      `${AuthRoutes.BASE}/${AuthRoutes.SIGN_UP.ROUTE}}`,
+    this.Post<UserCreateForm, LoginPayload>(
+      `${AuthRoutes.BASE}/${AuthRoutes.SIGN_UP.ROUTE}`,
       user,
       handleSuccess,
       handlError,
@@ -38,7 +38,7 @@ class AuthApi extends BaseApi {
   ) => {
     const handleSuccess = (data: Payload<LoginPayload>) => {
       dispatch(appSlice.actions.login(data.data));
-      navigate("/worksheet");
+      navigate("/");
     };
     const handlError = () => {
       dispatch(appSlice.actions.logout());

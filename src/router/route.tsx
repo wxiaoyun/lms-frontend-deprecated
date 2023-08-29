@@ -25,6 +25,11 @@ export const Router = createBrowserRouter([
           },
         ],
       },
+      {
+        id: "home",
+        path: "/index",
+        Component: () => <div>Home</div>,
+      },
     ],
   },
   {

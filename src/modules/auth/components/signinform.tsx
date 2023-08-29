@@ -17,7 +17,7 @@ import {
   UsernameOrEmailType,
 } from "../../../util/string";
 
-const ValidateCredentials = (
+export const ValidateCredentials = (
   usernameOrEmail: string,
   password: string,
 ): boolean => {
@@ -40,7 +40,7 @@ const ValidateCredentials = (
   }
 };
 
-const CredentialsToPayload = (
+export const CredentialsToPayload = (
   usernameOrEmail: string,
   password: string,
 ): UserLogin => {
