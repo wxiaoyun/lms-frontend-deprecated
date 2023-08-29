@@ -25,14 +25,14 @@ export const SignUpParticularsForm: React.FC<{
             className="w-full rounded-md p-1"
             type="text"
             required
-            value={userData.person.full_name}
+            value={userData.person_attributes.full_name}
             placeholder="Please enter your full name"
             onChange={(e) =>
               setUserData((u) => {
                 return {
                   ...u,
-                  person: {
-                    ...u.person,
+                  person_attributes: {
+                    ...u.person_attributes,
                     full_name: e.target.value,
                   },
                 };
@@ -60,14 +60,14 @@ export const SignUpParticularsForm: React.FC<{
             className="w-full rounded-md p-1"
             type="text"
             required
-            value={userData.person.preferred_name}
+            value={userData.person_attributes.preferred_name}
             placeholder="Please enter your preferred name"
             onChange={(e) =>
               setUserData((u) => {
                 return {
                   ...u,
-                  person: {
-                    ...u.person,
+                  person_attributes: {
+                    ...u.person_attributes,
                     preferred_name: e.target.value,
                   },
                 };
@@ -95,14 +95,14 @@ export const SignUpParticularsForm: React.FC<{
             className="w-full rounded-md p-1"
             type="text"
             required
-            value={userData.person.language_preference}
+            value={userData.person_attributes.language_preference}
             placeholder="Please enter your language preferrance"
             onChange={(e) =>
               setUserData((u) => {
                 return {
                   ...u,
-                  person: {
-                    ...u.person,
+                  person_attributes: {
+                    ...u.person_attributes,
                     language_preference: e.target.value,
                   },
                 };

@@ -22,7 +22,7 @@ export const SignUpForm: React.FC = () => {
     email: undefined,
     password: "",
     passwordConfirmation: "",
-    person: {
+    person_attributes: {
       full_name: "",
       preferred_name: "",
       language_preference: "",
