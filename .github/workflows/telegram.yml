@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: send telegram message on push
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && toJson(github.event.commits) != '[]'
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}

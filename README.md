@@ -44,9 +44,8 @@ Below are the instructions to get the project up and running on your local machi
    yarn install
    ```
 
-4. **Setting Up Environment**:  
-   Make a copy of `.env.example` and rename to `.env.development`:  
-   Then, update the `.env.development` file with the appropriate values if necessary.
+4. **Setting Up Port**:  
+   Update the `.config/constants.ts` file with the appropriate values if necessary.
 
 5. **Start the Development Server**:
 
