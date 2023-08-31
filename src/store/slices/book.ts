@@ -80,6 +80,10 @@ export const bookSlice = createSlice({
         );
       }
     },
+    /**
+     *  Update the search results
+     *  @param action PayloadAction<BookSearch[]> - The search results
+     */
     updateSearchResults: (state, action: PayloadAction<BookSearch[]>) => {
       state.searchResults = action.payload;
     },

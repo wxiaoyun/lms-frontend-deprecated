@@ -1,4 +1,4 @@
-export const BookRoute = {
+export const BookRoutes = {
   BASE: "book",
   LOAN: {
     BASE: "loan",
