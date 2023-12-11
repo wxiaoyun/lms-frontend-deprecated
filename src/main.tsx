@@ -2,11 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css"; // styling the toast notification
-import App from "./App.tsx";
 import "./index.css";
 
+import App from "./App.tsx";
 import store from "./store/store.ts";
 
 const root = document.getElementById("root");

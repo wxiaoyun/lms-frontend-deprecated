@@ -10,14 +10,14 @@
  * @property language - the book's language
  */
 interface Book {
-	id: number;
-	title: string;
-	author: string;
-	isbn: string;
-	publisher: string;
-	publication_date: string;
-	genre: string;
-	language: string;
+  id: number;
+  title: string;
+  author: string;
+  isbn: string;
+  publisher: string;
+  publication_date: string;
+  genre: string;
+  language: string;
 }
 
 /**
@@ -29,3 +29,17 @@ type BookCreate = Omit<Book, "id">;
  * BookUpdate is the object used to update a book
  */
 type BookUpdate = Partial<BookCreate>;
+
+/**
+ * BookState is the state of the book reducer
+ */
+interface BookState {
+  books: Book[];
+  search: string | undefined;
+  searchResults: BookSearch[];
+  page: number;
+  total: number;
+  step: number;
+}
+
+type BookSearch = Pick<Book, "id" | "title">;
