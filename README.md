@@ -1,5 +1,7 @@
 # Library Management System 📚
 
+This repo is partially rewritten with shadcn ui in [https://github.com/ForAeons/lms-frontend-v2](https://github.com/ForAeons/lms-frontend-v2). Please go to this repo for the latest version.
+
 ## Introduction
 
 The Library Management System is a comprehensive solution for managing a library's various operations, built with React, TypeScript, Tailwind, Redux, and Vite.js. It is designed to simplify the process of borrowing, returning, loaning of books, making/canceling reservations, managing books, with RBAC.
